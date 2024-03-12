@@ -52,6 +52,10 @@ _adb_completions() {
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -A directory -- "$cur" )
       ;;
 
+    'reconnect'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "device offline")" -- "$cur" )
+      ;;
+
     'sideload'*)
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -- "$cur" )
       ;;
@@ -117,7 +121,7 @@ _adb_completions() {
       ;;
 
     *)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-a -d -e -s -t -H -P -L --one-device --exit-on-write-error devices help version connect disconnect pair forward reverse mdns push pull sync shell emu install install-multiple install-multi-package uninstall bugreport jdwp logcat disable-verity enable-verity keygen wait-for-device wait-for-recovery wait-for-rescue wait-for-sideload wait-for-bootloader wait-for-disconnect get-state get-serialno get-devpath remount reboot sideload root unroot usb tcpip")" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-a -d -e -s -t -H -P -L --one-device --exit-on-write-error devices help version connect disconnect pair forward reverse mdns push pull sync shell emu install install-multiple install-multi-package uninstall bugreport jdwp logcat disable-verity enable-verity keygen wait-for-device wait-for-recovery wait-for-rescue wait-for-sideload wait-for-bootloader wait-for-disconnect get-state get-serialno get-devpath remount reboot sideload root unroot usb tcpip start-server kill-server reconnect attach detach host-features features")" -- "$cur" )
       ;;
 
   esac

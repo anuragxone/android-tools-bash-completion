@@ -67,6 +67,19 @@ adb:
 - usb
 - tcpip
 
+# internal debugging
+- start-server
+- kill-server
+- reconnect
+
+# usb
+- attach
+- detach
+
+# features
+- host-features
+- features
+
 # adb devices
 adb devices:
 - -l
@@ -227,6 +240,11 @@ adb reboot:
 
 adb sideload:
 - <file>
+
+# internal debugging
+adb reconnect:
+- device
+- offline
 
 
 
