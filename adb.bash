@@ -28,12 +28,20 @@ _adb_completions() {
   local compline="${compwords[*]}"
 
   case "$compline" in
+    'install-multi-packages'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -W "$(_adb_completions_filter "-l -r -t -s -d -p -g --abi --instant --no-streaming --streaming --fastdeploy --no-fastdeploy --force-agent --date-check-agent --version-check-agent --local-agent")" -- "$cur" )
+      ;;
+
     'forward --no-rebind'*)
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "tcp: localreserved: localfilesystem: jdwp: vsock: acceptfd:")" -- "$cur" )
       ;;
 
     'reverse --no-rebind'*)
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "tcp: localabstract: localreserved: localfilesystem:")" -- "$cur" )
+      ;;
+
+    'install-multiple'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -W "$(_adb_completions_filter "-l -r -t -s -d -p -g --abi --instant --no-streaming --streaming --fastdeploy --no-fastdeploy --force-agent --date-check-agent --version-check-agent --local-agent")" -- "$cur" )
       ;;
 
     'devices'*)
@@ -54,6 +62,10 @@ _adb_completions() {
 
     'pull -z'*)
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "any none brotli lz4 zstd")" -- "$cur" )
+      ;;
+
+    'install'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -W "$(_adb_completions_filter "-l -r -t -s -d -g --abi --instant --no-streaming --streaming --fastdeploy --no-fastdeploy --force-agent --date-check-agent --version-check-agent --local-agent")" -- "$cur" )
       ;;
 
     'shell'*)
@@ -77,7 +89,7 @@ _adb_completions() {
       ;;
 
     *)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-a -d -e -s -t -H -P -L --one-device --exit-on-write-error devices help version connect disconnect pair forward reverse mdns push pull sync shell emu")" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-a -d -e -s -t -H -P -L --one-device --exit-on-write-error devices help version connect disconnect pair forward reverse mdns push pull sync shell emu install install-multiple install-multi-package uninstall")" -- "$cur" )
       ;;
 
   esac

@@ -34,6 +34,10 @@ adb:
 - emu
 
 # app installation
+- install
+- install-multiple
+- install-multi-package
+- uninstall
 
 # adb devices
 adb devices:
@@ -109,5 +113,67 @@ adb shell:
 - -x
 
 # app installation
+adb install:
+- <file>
+- -l
+- -r
+- -t
+- -s
+- -d
+- -g
+- --abi
+- --instant
+- --no-streaming
+- --streaming
+- --fastdeploy
+- --no-fastdeploy
+- --force-agent
+- --date-check-agent
+- --version-check-agent
+- --local-agent
+
+adb install-multiple:
+- <file>
+- -l
+- -r
+- -t
+- -s
+- -d
+- -p
+- -g
+- --abi
+- --instant
+- --no-streaming
+- --streaming
+- --fastdeploy
+- --no-fastdeploy
+- --force-agent
+- --date-check-agent
+- --version-check-agent
+- --local-agent
+
+adb install-multi-packages:
+- <file>
+- -l
+- -r
+- -t
+- -s
+- -d
+- -p
+- -g
+- --abi
+- --instant
+- --no-streaming
+- --streaming
+- --fastdeploy
+- --no-fastdeploy
+- --force-agent
+- --date-check-agent
+- --version-check-agent
+- --local-agent
+
+adb uninstall:
+- -k
+
 
 
