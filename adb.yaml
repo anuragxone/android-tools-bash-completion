@@ -39,6 +39,19 @@ adb:
 - install-multi-package
 - uninstall
 
+# debugging
+- bugreport
+- jdwp
+- logcat
+
+# security
+- disable-verity
+- enable-verity
+- keygen
+
+# scripting
+
+
 # adb devices
 adb devices:
 - -l
@@ -174,6 +187,21 @@ adb install-multi-packages:
 
 adb uninstall:
 - -k
+
+# debugging
+adb bugreport:
+- <file>
+- <directory>
+
+adb logcat:
+- --help
+
+# security
+adb keygen: 
+- <file>
+
+# scripting
+
 
 
 

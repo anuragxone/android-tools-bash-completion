@@ -44,6 +44,14 @@ _adb_completions() {
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -W "$(_adb_completions_filter "-l -r -t -s -d -p -g --abi --instant --no-streaming --streaming --fastdeploy --no-fastdeploy --force-agent --date-check-agent --version-check-agent --local-agent")" -- "$cur" )
       ;;
 
+    'uninstall'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-k")" -- "$cur" )
+      ;;
+
+    'bugreport'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -A directory -- "$cur" )
+      ;;
+
     'devices'*)
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-l")" -- "$cur" )
       ;;
@@ -68,6 +76,14 @@ _adb_completions() {
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -W "$(_adb_completions_filter "-l -r -t -s -d -g --abi --instant --no-streaming --streaming --fastdeploy --no-fastdeploy --force-agent --date-check-agent --version-check-agent --local-agent")" -- "$cur" )
       ;;
 
+    'logcat'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "--help")" -- "$cur" )
+      ;;
+
+    'keygen'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -- "$cur" )
+      ;;
+
     'shell'*)
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-e -n -T -t -x")" -- "$cur" )
       ;;
@@ -89,7 +105,7 @@ _adb_completions() {
       ;;
 
     *)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-a -d -e -s -t -H -P -L --one-device --exit-on-write-error devices help version connect disconnect pair forward reverse mdns push pull sync shell emu install install-multiple install-multi-package uninstall")" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-a -d -e -s -t -H -P -L --one-device --exit-on-write-error devices help version connect disconnect pair forward reverse mdns push pull sync shell emu install install-multiple install-multi-package uninstall bugreport jdwp logcat disable-verity enable-verity keygen")" -- "$cur" )
       ;;
 
   esac
