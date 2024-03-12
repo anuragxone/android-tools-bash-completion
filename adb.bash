@@ -52,6 +52,10 @@ _adb_completions() {
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -A directory -- "$cur" )
       ;;
 
+    'sideload'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -- "$cur" )
+      ;;
+
     'devices'*)
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-l")" -- "$cur" )
       ;;
@@ -76,12 +80,20 @@ _adb_completions() {
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -W "$(_adb_completions_filter "-l -r -t -s -d -g --abi --instant --no-streaming --streaming --fastdeploy --no-fastdeploy --force-agent --date-check-agent --version-check-agent --local-agent")" -- "$cur" )
       ;;
 
+    'remount'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-R")" -- "$cur" )
+      ;;
+
     'logcat'*)
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "--help")" -- "$cur" )
       ;;
 
     'keygen'*)
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -- "$cur" )
+      ;;
+
+    'reboot'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "bootloader recovery sideload sideload-auto-reboot")" -- "$cur" )
       ;;
 
     'shell'*)
@@ -105,7 +117,7 @@ _adb_completions() {
       ;;
 
     *)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-a -d -e -s -t -H -P -L --one-device --exit-on-write-error devices help version connect disconnect pair forward reverse mdns push pull sync shell emu install install-multiple install-multi-package uninstall bugreport jdwp logcat disable-verity enable-verity keygen")" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-a -d -e -s -t -H -P -L --one-device --exit-on-write-error devices help version connect disconnect pair forward reverse mdns push pull sync shell emu install install-multiple install-multi-package uninstall bugreport jdwp logcat disable-verity enable-verity keygen wait-for-device wait-for-recovery wait-for-rescue wait-for-sideload wait-for-bootloader wait-for-disconnect get-state get-serialno get-devpath remount reboot sideload root unroot usb tcpip")" -- "$cur" )
       ;;
 
   esac
