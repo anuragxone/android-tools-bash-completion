@@ -29,6 +29,12 @@ adb:
 - pull
 - sync
 
+# shell
+- shell
+- emu
+
+# app installation
+
 # adb devices
 adb devices:
 - -l
@@ -92,4 +98,16 @@ adb sync:
 - -Z
 
 adb sync -z: &ALGORITHM
+
+
+# shell
+adb shell:
+- -e
+- -n
+- -T
+- -t
+- -x
+
+# app installation
+
 

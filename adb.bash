@@ -56,6 +56,10 @@ _adb_completions() {
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "any none brotli lz4 zstd")" -- "$cur" )
       ;;
 
+    'shell'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-e -n -T -t -x")" -- "$cur" )
+      ;;
+
     'mdns'*)
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "check services")" -- "$cur" )
       ;;
@@ -68,8 +72,12 @@ _adb_completions() {
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-a -z -Z")" -- "$cur" )
       ;;
 
+    'sync'*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-n -l -z -Z")" -- "$cur" )
+      ;;
+
     *)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-a -d -e -s -t -H -P -L --one-device --exit-on-write-error devices help version connect disconnect pair forward reverse mdns push pull sync")" -- "$cur" )
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-a -d -e -s -t -H -P -L --one-device --exit-on-write-error devices help version connect disconnect pair forward reverse mdns push pull sync shell emu")" -- "$cur" )
       ;;
 
   esac
