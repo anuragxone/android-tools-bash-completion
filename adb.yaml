@@ -1,0 +1,95 @@
+adb:
+# global options
+- -a #for all
+- -d
+- -e
+- -s
+- -t
+- -H
+- -P
+- -L
+- --one-device
+- --exit-on-write-error
+
+# general commands
+- devices
+- help
+- version
+
+# networking
+- connect
+- disconnect
+- pair
+- forward
+- reverse
+- mdns
+
+# file transfer
+- push
+- pull
+- sync
+
+# adb devices
+adb devices:
+- -l
+
+# networking
+adb forward:
+- --list
+- --no-rebind
+- --remove
+- --remove-all
+
+adb forward --no-rebind:
+- "tcp:"
+- "localreserved:"
+- "localfilesystem:"
+- "jdwp:"
+- "vsock:"
+- "acceptfd:"
+
+adb reverse:
+- --list
+- --no-rebind
+- --remove
+- --remove-all
+
+adb reverse --no-rebind:
+- "tcp:"
+- "localabstract:"
+- "localreserved:"
+- "localfilesystem:"
+
+adb mdns:
+- check
+- services
+
+# file transfer
+adb push:
+- --sync
+- -n
+- -z
+- -Z
+
+adb push -z: &ALGORITHM
+- any
+- none
+- brotli
+- lz4
+- zstd
+
+adb pull:
+- -a 
+- -z
+- -Z
+
+adb pull -z: *ALGORITHM
+
+adb sync:
+- -n
+- -l
+- -z
+- -Z
+
+adb sync -z: &ALGORITHM
+
