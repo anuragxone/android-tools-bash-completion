@@ -130,9 +130,14 @@ adb push -z: &ALGORITHM
 - zstd
 
 adb pull:
+- $(adb shell "ls -a -d /*" 2>/dev/null | tr -d '\r')
 - -a 
 - -z
 - -Z
+
+adb pull *:
+- <file>
+- <directory>
 
 adb pull -z: *ALGORITHM
 

@@ -88,6 +88,10 @@ _adb_completions() {
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-R")" -- "$cur" )
       ;;
 
+    'pull '*)
+      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -A file -A directory -- "$cur" )
+      ;;
+
     'logcat'*)
       while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "--help")" -- "$cur" )
       ;;
@@ -113,7 +117,20 @@ _adb_completions() {
       ;;
 
     'pull'*)
-      while read -r; do COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "-a -z -Z")" -- "$cur" )
+      while read -r; do 
+      local IFS=$'\n'
+      local files=""
+          if [ -z ${cur} ]; then
+              files=$(adb shell "ls -a -d /*" 2>/dev/null | tr -d '\r')
+              
+              
+          else
+              local stripped_cur=$(echo ${cur} | sed 's,^",,')
+              files=$(adb shell "ls -a -d '${stripped_cur}'*" 2>/dev/null | tr -d '\r')
+              
+          fi
+          echo stripped_cur
+        COMPREPLY+=( "$REPLY" ); done < <( compgen -W "$(_adb_completions_filter "$files -a -z -Z")" -- "$cur" )
       ;;
 
     'sync'*)
